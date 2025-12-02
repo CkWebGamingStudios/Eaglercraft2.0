@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eaglercraft 2 Dashboard</title>
+  <link rel="stylesheet" href="/src/css/dashboard.css">
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2 class="logo">EC2</h2>
+
+    <ul class="menu">
+      <li onclick="nav('leaderboard')">🏆 Leaderboard</li>
+      <li class="active" onclick="nav('hub')">🏠 Hub</li>
+      <li onclick="nav('profile')">👤 Profile</li>
+      <li onclick="nav('notifications')">🔔 Notifications</li>
+      <li onclick="nav('settings')">⚙ Settings</li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <h1>Hub</h1>
+
+    <div class="hub-options">
+      <div class="hub-card" onclick="openSection('forums')">💬 Forums</div>
+      <div class="hub-card" onclick="openSection('lab')">🧪 Lab</div>
+      <div class="hub-card" onclick="openSection('game')">🎮 Game</div>
+    </div>
+
+    <div id="hub-content" class="hub-content">
+      <p>Select an option above.</p>
+    </div>
+
+  </div>
+
+  <script src="/src/js/dashboard.js"></script>
+</body>
+</html>

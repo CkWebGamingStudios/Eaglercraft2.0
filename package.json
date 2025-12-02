@@ -1,0 +1,11 @@
+{
+  "name": "eaglercraft2",
+  "version": "1.0.0",
+  "description": "Eaglercraft2 — Pages + Functions integrated project",
+  "scripts": {
+    "dev": "live-server --port=3000",
+    "build": "echo \"No build step (static site)\""
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

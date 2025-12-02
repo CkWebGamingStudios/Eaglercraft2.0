@@ -1,0 +1,1 @@
+export default function EntityLoader(tm, e){ tm.registerTexture(e.id, e["source-texture"]); if(e["source-json"]) tm.registerEntityDef(e.id, e["source-json"]); }

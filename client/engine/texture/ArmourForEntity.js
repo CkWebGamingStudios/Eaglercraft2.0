@@ -1,0 +1,1 @@
+export default function ArmourForEntity(tm, e){ tm.registerTexture(e.id, e["source-texture"]); if(e["source-json"]) tm.registerModel(e.id, e["source-json"]); }

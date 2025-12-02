@@ -1,0 +1,11 @@
+name = "eaglercraft2-pages"
+compatibility_date = "2025-11-28"
+
+# NOTE: When using Cloudflare Pages + Functions, you usually configure KV bindings via the Pages Dashboard.
+# The wrangler.toml below is a template for local testing or wrangler deployments. Replace the KV namespace id.
+[vars]
+# no vars here; use Pages environment vars in dashboard
+
+[kv_namespaces]
+# Example - fill in 'id' with the namespace ID you get after creating a KV namespace:
+# { binding = "EAGLE_KV", id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" }

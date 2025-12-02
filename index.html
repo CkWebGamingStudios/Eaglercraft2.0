@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eaglercraft 2</title>
+  <script>
+    // Auto redirect based on login status
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      window.location.href = "/src/pages/launcher.html";
+    } else {
+      window.location.href = "/src/pages/login.html";
+    }
+  </script>
+</head>
+<body>
+  Redirecting...
+</body>
+</html>

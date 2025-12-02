@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eaglercraft 2 Launcher</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url("assets/backgrounds/launcher_bg.jpg") center/cover no-repeat fixed;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 15px;
+      width: 400px;
+      margin: 80px auto;
+    }
+
+    button {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      background: #00aa00;
+      border: none;
+      font-size: 18px;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00cc00;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Eaglercraft 2 Launcher</h1>
+    <h3 id="username">Loading...</h3>
+
+    <button onclick="playGame()">▶ Play Game</button>
+    <button onclick="openMP()">🌐 Multiplayer</button>
+    <button onclick="settings()">⚙ Player Settings</button>
+    <button onclick="loadGame()">📂 Load Save</button>
+    <button onclick="saveGame()">💾 Save Game</button>
+    <button onclick="logout()" style="background:#bb0000;">Logout</button>
+  </div>
+
+  <script src="launcher.js"></script>
+</body>
+</html>

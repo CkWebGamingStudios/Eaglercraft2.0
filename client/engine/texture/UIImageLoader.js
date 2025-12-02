@@ -1,0 +1,1 @@
+export default function UIImageLoader(tm, e){ tm.registerTexture(e.id, e["source-texture"]); }

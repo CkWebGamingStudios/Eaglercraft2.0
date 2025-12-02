@@ -1,0 +1,1 @@
+export default function GenericLoader(tm, e){ tm.registerTexture(e.id, e["source-texture"]); }

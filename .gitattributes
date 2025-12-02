@@ -1,0 +1,22 @@
+# Force consistent line endings for all text files
+* text=auto eol=lf
+
+# Treat image and binary files as binary (no line-ending changes)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.mp4 binary
+*.mcmeta text eol=lf
+
+# Minecraft assets often include .mcmeta and JSON files
+*.json text eol=lf
+
+# Do NOT touch line endings inside these folders
+assets/** binary
+
+# Make sure Git never converts CRLF ↔ LF automatically
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
