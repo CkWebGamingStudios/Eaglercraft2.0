@@ -3,107 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eaglercraft 2 Login</title>
-
-    <!-- FirebaseUI CSS -->
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.css" />
+    <title>Eaglercraft 2 – Login</title>
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
             background: #0e0e0e;
             color: white;
+            font-family: Arial, sans-serif;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            flex-direction: column;
         }
+
         .box {
+            width: 330px;
             background: #1a1a1a;
             padding: 30px;
             border-radius: 12px;
-            width: 350px;
+            box-shadow: 0 0 15px black;
             text-align: center;
-            box-shadow: 0 0 15px #000;
         }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 12px 40px;
+            border: none;
+            background: #ffcc00;
+            color: black;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #error {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
         #loader {
-            margin-top: 20px;
+            margin-top: 10px;
             color: yellow;
+            font-size: 14px;
+            display: none;
         }
     </style>
 </head>
+
 <body>
+
     <div class="box">
         <h2>Eaglercraft 2 Login</h2>
 
-        <!-- FirebaseUI will be rendered here -->
-        <div id="firebaseui-auth-container"></div>
+        <input id="email" placeholder="Email" type="email">
+        <input id="password" placeholder="Password" type="password">
+
+        <button onclick="login()">Login</button>
+
         <div id="loader">Loading...</div>
+        <div id="error"></div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth-compat.js"></script>
+<script>
+async function login() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const loader = document.getElementById("loader");
+    const error = document.getElementById("error");
 
-    <!-- FirebaseUI JS -->
-    <script src="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.js"></script>
+    loader.style.display = "block";
+    error.textContent = "";
 
-    <!-- Your Firebase config -->
-    <script src="/firebase-config.js"></script>
+    try {
+        const res = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
 
-    <script>
-        // Initialize FirebaseUI
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        const data = await res.json();
+        loader.style.display = "none";
 
-        var uiConfig = {
-            callbacks: {
-                signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-                    // User signed in successfully.
-                    console.log("User signed in:", authResult.user);
+        if (!res.ok) {
+            error.textContent = data.error || "Invalid login";
+            return;
+        }
 
-                    // Optional: store token locally for game use
-                    authResult.user.getIdToken().then(function(token) {
-                        localStorage.setItem("eagler_user_token", token);
-                    });
+        localStorage.setItem("token", data.token);
 
-                    // Redirect to game page
-                    window.location.href = "/game/";
-                    return false; // Avoid automatic redirect
-                },
-                uiShown: function() {
-                    document.getElementById('loader').style.display = 'none';
-                }
-            },
-            signInFlow: 'popup',
-            signInOptions: [
-                firebase.auth.GoogleAuthProvider.eaglercraft2o,
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                // Add more providers if needed
-            ],
-            tosUrl: '/terms-of-service.html',
-            privacyPolicyUrl: '/privacy-policy.html'
-        };
+        // redirect to dashboard/hub
+        window.location.href = "/src/pages/dashboard.html";
 
-        // Start FirebaseUI
-        ui.start('#firebaseui-auth-container', uiConfig);
-    </script>
-	<script>
-    (async function(){
-      try {
-        // Load decrypted bundle generated via worker route /assets/app.js
-        const r = await fetch('/assets/app.js');
-        if (!r.ok) throw new Error('Failed to load app bundle');
-        const txt = await r.text();
-        // evaluate the decrypted script in page context
-        const s = document.createElement('script');
-        s.type = 'module';
-        s.textContent = txt;
-        document.documentElement.appendChild(s);
-      } catch (e) {
-        document.getElementById('root').innerText = 'Failed to load app: ' + e.message;
-      }
-    })();
-  </script>
+    } catch (e) {
+        loader.style.display = "none";
+        error.textContent = "Network error: " + e.message;
+    }
+}
+</script>
+
 </body>
 </html>
