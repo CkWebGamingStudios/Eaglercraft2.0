@@ -1,19 +1,43 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Eaglercraft 2</title>
-  <script>
-    // Auto redirect based on login status
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      window.location.href = "/src/pages/launcher.html";
-    } else {
-      window.location.href = "/src/pages/login.html";
-    }
-  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Eaglercraft 2.0 — Launcher</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="src/css/global.css">
+  <link rel="stylesheet" href="src/css/sidebar.css">
 </head>
 <body>
-  Redirecting...
+  <div id="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <img src="assets/background.jpg" alt="" class="brand-bg">
+        <h1 class="brand-title">Eaglercraft</h1>
+      </div>
+      <nav>
+        <ul>
+          <li data-page="home.html" class="nav-item active">Home</li>
+          <li data-page="launcher.html" class="nav-item">Launcher</li>
+          <li data-page="servers.html" class="nav-item">Servers</li>
+          <li data-page="profile.html" class="nav-item">Profile</li>
+          <li data-page="friends.html" class="nav-item">Friends</li>
+          <li data-page="marketplace.html" class="nav-item">Marketplace</li>
+          <li data-page="settings.html" class="nav-item">Settings</li>
+          <li data-page="about.html" class="nav-item">About</li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <small>v2.0</small>
+      </div>
+    </aside>
+
+    <main class="content" id="content" role="main" tabindex="-1">
+      <!-- pages load here -->
+      <div class="loading">Loading...</div>
+    </main>
+  </div>
+
+  <script src="main.js" defer></script>
 </body>
 </html>

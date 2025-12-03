@@ -1,38 +1,170 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Eaglercraft 2 Dashboard</title>
-  <link rel="stylesheet" href="/src/css/dashboard.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eaglercraft 2 – Hub</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: url('/assets/background.jpg') center/cover no-repeat fixed;
+        color: white;
+        display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 230px;
+        height: 100vh;
+        background: rgba(15, 15, 15, 0.88);
+        backdrop-filter: blur(6px);
+        border-right: 2px solid #333;
+        padding-top: 20px;
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 22px;
+        letter-spacing: 1px;
+    }
+
+    .side-item {
+        padding: 16px 22px;
+        margin: 10px;
+        background: rgba(30, 30, 30, 0.8);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.25s;
+        font-weight: 400;
+    }
+
+    .side-item:hover {
+        background: rgba(50, 50, 50, 0.9);
+        transform: translateX(5px);
+    }
+
+    /* Main */
+    .main {
+        margin-left: 230px;
+        width: calc(100% - 230px);
+        padding: 0;
+        backdrop-filter: blur(3px);
+    }
+
+    /* Top Bar */
+    .topbar {
+        width: 100%;
+        background: rgba(20,20,20,0.85);
+        padding: 20px;
+        border-bottom: 2px solid #333;
+        text-align: center;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    /* Card Layout EXACT Like Your Sketch */
+    .card-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 0;
+        gap: 35px;
+    }
+
+    .row {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+    }
+
+    .card {
+        width: 190px;
+        height: 180px;
+        background: rgba(20, 20, 20, 0.85);
+        border: 2px solid #4c6bff;
+        border-radius: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.2s;
+        backdrop-filter: blur(4px);
+    }
+
+    .card:hover {
+        background: rgba(35, 35, 35, 0.95);
+        transform: scale(1.07);
+        border-color: #6f88ff;
+    }
+</style>
 </head>
 
 <body>
-  <div class="sidebar">
-    <h2 class="logo">EC2</h2>
 
-    <ul class="menu">
-      <li onclick="nav('leaderboard')">🏆 Leaderboard</li>
-      <li class="active" onclick="nav('hub')">🏠 Hub</li>
-      <li onclick="nav('profile')">👤 Profile</li>
-      <li onclick="nav('notifications')">🔔 Notifications</li>
-      <li onclick="nav('settings')">⚙ Settings</li>
-    </ul>
-  </div>
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Menu</h2>
 
-  <div class="main">
-    <h1>Hub</h1>
+    <div class="side-item" onclick="go('/src/pages/dashboard.html')">Hub</div>
+    <div class="side-item" onclick="go('/src/pages/leaderboard.html')">Leaderboard</div>
+    <div class="side-item" onclick="go('/src/pages/profile.html')">Profile</div>
+    <div class="side-item" onclick="go('/src/pages/notifications.html')">Notifications</div>
+    <div class="side-item" onclick="go('/src/pages/settings.html')">Settings</div>
 
-    <div class="hub-options">
-      <div class="hub-card" onclick="openSection('forums')">💬 Forums</div>
-      <div class="hub-card" onclick="openSection('lab')">🧪 Lab</div>
-      <div class="hub-card" onclick="openSection('game')">🎮 Game</div>
+    <div class="side-item" onclick="logout()" style="margin-top:40px;background:#ff3030c2;">Logout</div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <!-- Top Bar -->
+    <div class="topbar">Hub</div>
+
+    <!-- Cards (2 top, 1 bottom like the sketch) -->
+    <div class="card-grid">
+
+        <div class="row">
+            <div class="card" onclick="go('/src/pages/game.html')">Game</div>
+            <div class="card" onclick="go('/src/pages/forums.html')">Forums</div>
+        </div>
+
+        <div class="row">
+            <div class="card" onclick="go('/src/pages/lab.html')">Lab</div>
+        </div>
+
     </div>
 
-    <div id="hub-content" class="hub-content">
-      <p>Select an option above.</p>
-    </div>
+</div>
 
-  </div>
+<script src="/src/js/auth-protect.js"></script>
 
-  <script src="/src/js/dashboard.js"></script>
+<script>
+function go(url) {
+    window.location.href = url;
+}
+
+function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/src/pages/login.html";
+}
+</script>
+
 </body>
 </html>

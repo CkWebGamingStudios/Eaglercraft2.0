@@ -1,0 +1,36 @@
+<div class="page-root">
+  <h2>Settings</h2>
+  <div class="form-row">
+    <label class="switch">Dark Mode
+      <input id="dark-toggle" type="checkbox">
+    </label>
+
+    <label class="switch">VSync
+      <input id="vsync-toggle" type="checkbox">
+    </label>
+
+    <label class="switch">Fullscreen on Play
+      <input id="fullscreen-toggle" type="checkbox">
+    </label>
+
+    <label>FOV <input id="fov-slider" class="slider" type="range" min="60" max="120"> <span id="fov-val">90</span></label>
+
+    <label>Sensitivity <input id="sens-slider" class="slider" type="range" min="1" max="100"> <span id="sens-val">50</span></label>
+
+    <label>GUI Scale
+      <select id="gui-scale">
+        <option value="auto">Auto</option>
+        <option value="small">Small</option>
+        <option value="normal" selected>Normal</option>
+        <option value="large">Large</option>
+      </select>
+    </label>
+
+    <div class="row">
+      <button id="reset-settings" class="btn" style="background:#ef4444">Reset</button>
+      <button id="save-settings" class="btn">Save</button>
+    </div>
+
+    <div id="settings-status" class="small"></div>
+  </div>
+</div>

@@ -1,53 +1,25 @@
-// Check login
-const token = localStorage.getItem("token");
+export function initLauncher(){
+  const versionSelect = document.getElementById('version-select');
+  const memorySlider = document.getElementById('memory-slider');
+  const memoryVal = document.getElementById('memory-val');
+  const playBtn = document.getElementById('play-btn');
+  const status = document.getElementById('launcher-status');
 
-if (!token) {
-  window.location.href = "/login.html"; // not logged in → redirect
-}
+  // populate versions (example)
+  const versions = ['1.21.1','1.20.2','snapshot-23w17a'];
+  versions.forEach(v => {
+    const opt = document.createElement('option'); opt.value = v; opt.textContent = v;
+    versionSelect.appendChild(opt);
+  });
 
-// Decode the token to show username
-function parseJWT(token) {
-  const base64Url = token.split('.')[1];
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  return JSON.parse(atob(base64));
-}
+  memorySlider.value = localStorage.getItem('memory') || 2048;
+  memoryVal.textContent = memorySlider.value;
+  memorySlider.addEventListener('input', ()=> memoryVal.textContent = memorySlider.value);
 
-const decoded = parseJWT(token);
-document.getElementById("username").innerText = "Welcome, " + decoded.email;
-
-// Launcher actions
-function playGame() {
-  window.location.href = "/index.html"; // your game page
-}
-
-function openMP() {
-  window.location.href = "/pages/multiplayer.html";
-}
-
-function settings() {
-  window.location.href = "/player-settings.html";
-}
-
-function saveGame() {
-  fetch("/api/saves/save", {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ data: "demo save" })
-  }).then(r => r.json()).then(console.log);
-}
-
-function loadGame() {
-  fetch("/api/saves/load", {
-    headers: {
-      "Authorization": "Bearer " + token
-    }
-  }).then(r => r.json()).then(console.log);
-}
-
-function logout() {
-  localStorage.removeItem("token");
-  window.location.href = "/login.html";
+  playBtn.addEventListener('click', () => {
+    status.textContent = `Launching ${versionSelect.value} with ${memorySlider.value} MB...`;
+    // trigger actual launch flow here (native or server)
+    setTimeout(()=> status.textContent = 'Started (demo).', 1200);
+    localStorage.setItem('memory', memorySlider.value);
+  });
 }

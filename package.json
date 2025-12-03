@@ -6,6 +6,7 @@
     "dev": "live-server --port=3000",
     "build": "echo \"No build step (static site)\""
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }

@@ -1,0 +1,25 @@
+/* sidebar.css */
+.sidebar{
+  width:220px;
+  background:linear-gradient(180deg,#111827,#0b1220);
+  color:#dbeafe;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  position:sticky;
+  top:0;
+}
+.brand{padding:18px;text-align:center}
+.brand-title{margin:0;font-size:1.1rem}
+.brand-bg{width:100%;height:56px;object-fit:cover;border-radius:8px;margin-bottom:8px;opacity:.35}
+.sidebar nav{flex:1;padding:8px}
+.sidebar ul{list-style:none;margin:0;padding:0}
+.nav-item{
+  padding:10px 14px;border-radius:8px;margin:6px 8px;cursor:pointer;color:#c7d2fe;
+}
+.nav-item:hover{background:rgba(255,255,255,0.03)}
+.nav-item.active{background:rgba(96,165,250,0.12);color:#fff}
+.sidebar-footer{padding:12px;text-align:center;color:#9ca3af}
+@media (max-width:900px){
+  .sidebar{display:none}
+}
