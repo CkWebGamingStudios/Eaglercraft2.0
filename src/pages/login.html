@@ -17,7 +17,7 @@
             align-items: center;
         }
 
-        .box {
+        .login-box {
             width: 330px;
             background: #1a1a1a;
             padding: 30px;
@@ -62,53 +62,26 @@
 
 <body>
 
-    <div class="box">
-        <h2>Eaglercraft 2 Login</h2>
 
-        <input id="email" placeholder="Email" type="email">
-        <input id="password" placeholder="Password" type="password">
+<div class="login-box">
+  <h2>Login</h2>
+  <input id="email" type="email" placeholder="Enter email" />
+  <button id="loginBtn">Continue</button>
+</div>
 
-        <button onclick="login()">Login</button>
+<script type="module">
+  import { loginByEmail, loadPlayerTemplate } from "../js/sync.js";
 
-        <div id="loader">Loading...</div>
-        <div id="error"></div>
-    </div>
-
-<script>
-async function login() {
+  document.getElementById("loginBtn").addEventListener("click", async () => {
     const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const loader = document.getElementById("loader");
-    const error = document.getElementById("error");
+    if (!email) return alert("Enter email");
 
-    loader.style.display = "block";
-    error.textContent = "";
+    const { uid } = await loginByEmail(email);
+    await loadPlayerTemplate(uid);
 
-    try {
-        const res = await fetch("/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-        });
-
-        const data = await res.json();
-        loader.style.display = "none";
-
-        if (!res.ok) {
-            error.textContent = data.error || "Invalid login";
-            return;
-        }
-
-        localStorage.setItem("token", data.token);
-
-        // redirect to dashboard/hub
-        window.location.href = "/src/pages/dashboard.html";
-
-    } catch (e) {
-        loader.style.display = "none";
-        error.textContent = "Network error: " + e.message;
-    }
-}
+    // Redirect to home/launcher page
+    window.location.href = "home.html";
+  });
 </script>
 
 </body>

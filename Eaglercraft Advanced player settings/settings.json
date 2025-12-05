@@ -1,0 +1,33 @@
+{
+  "theme": "light",
+  "vsync": true,
+  "fov": 75,
+  "guiScale": 3,
+  "sensitivity": 0.5,
+  "language": "en_US",
+  "video": {
+    "renderDistance": 8,
+    "brightness": 1.0,
+    "fullscreen": false,
+    "smoothLighting": true,
+    "graphics": "fancy"
+  },
+  "audio": {
+    "master": 100,
+    "music": 70,
+    "weather": 80,
+    "blocks": 80,
+    "mobs": 85
+  },
+  "keybinds": {
+    "forward": "W",
+    "back": "S",
+    "left": "A",
+    "right": "D",
+    "jump": "SPACE",
+    "inventory": "E"
+  },
+  "resourcePacks": { "enabled": [], "order": [] },
+  "shaderPack": "",
+  "selectedVersion": ""
+}
